@@ -1,16 +1,15 @@
 import { useState } from "react";
 import TodoList from "./TodoList";
-import { v4 as uuidv4 } from 'uuid';
 
 export default function Todos() {
     const [ todos , setTodos ] = useState([
         {
-            id : uuidv4(),
+            id : 1,
             title : 'go to school and read books',
             status: true
         },
         {
-            id : uuidv4(),
+            id : 2,
             title : 'go to gym at 17:00',
             status : false
         }
@@ -29,7 +28,7 @@ export default function Todos() {
             setTodos([
                 ...todos,
                 {
-                    id : uuidv4(),
+                    id : 3,
                     title : newTodoTitle,
                     status : false,
                 }
