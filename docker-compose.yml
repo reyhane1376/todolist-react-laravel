@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: docker.arvancloud.ir/postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: todolist
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+
+  pgadmin:
+    image: docker.arvancloud.ir/dpage/pgadmin4
+    container_name: pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+    ports:
+      - "8080:80"
+    networks:
+      - my_network
+
+networks:
+  my_network:
