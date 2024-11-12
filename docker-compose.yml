@@ -20,7 +20,36 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin_password
     ports:
-      - "8080:80"
+      - "8085:80"
+    networks:
+      - my_network
+
+  laravel:
+    build:
+      context: ./Back
+      dockerfile: Dockerfile
+    container_name: react-laravel-back
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: todolist
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    depends_on:
+      - postgres
+
+  react:
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    container_name: react_container
+    ports:
+      - "3000:3000"
     networks:
       - my_network
 
