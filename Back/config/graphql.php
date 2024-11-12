@@ -75,10 +75,10 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                'todolists' => App\GraphQL\Queries\TodoListQuery::class,
             ],
             'mutation' => [
-                // ExampleMutation::class,
+                'TodoList' => App\GraphQL\Types\TodoListType::class,
             ],
             // The types only available in this schema
             'types' => [
