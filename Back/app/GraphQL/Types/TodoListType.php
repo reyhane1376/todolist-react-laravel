@@ -25,7 +25,7 @@ class TodoListType extends GraphQLType
                 'description' => 'The title of the todo list',
             ],
             'status' => [
-                'type' => Type::string(),
+                'type' => Type::boolean(),
                 'description' => 'The description of the todo list',
             ],
             'created_at' => [
