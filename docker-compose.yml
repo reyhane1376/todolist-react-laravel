@@ -12,6 +12,8 @@ services:
       - "5432:5432"
     networks:
       - my_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   pgadmin:
     image: docker.arvancloud.ir/dpage/pgadmin4
@@ -55,3 +57,6 @@ services:
 
 networks:
   my_network:
+
+volumes:
+  postgres_data:

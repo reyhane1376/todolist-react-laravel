@@ -1,4 +1,4 @@
-FROM node:16
+FROM docker.arvancloud.ir/node:16
 
 # Set the working directory
 WORKDIR /app
