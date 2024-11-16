@@ -78,11 +78,11 @@ return [
                 'todolists' => App\GraphQL\Queries\TodoListQuery::class,
             ],
             'mutation' => [
-                'TodoList' => App\GraphQL\Types\TodoListType::class,
+                //
             ],
             // The types only available in this schema
             'types' => [
-                // ExampleType::class,
+                'TodoList' => App\GraphQL\Types\TodoListType::class,
             ],
 
             // Laravel HTTP middleware
