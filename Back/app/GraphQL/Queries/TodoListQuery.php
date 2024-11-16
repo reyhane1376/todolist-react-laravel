@@ -13,7 +13,7 @@ use Rebing\GraphQL\Support\SelectFields;
 class TodoListQuery extends Query
 {
     protected $attributes = [
-        'name' => 'todoList',
+        'name'        => 'todoList',
         'description' => 'A query'
     ];
 

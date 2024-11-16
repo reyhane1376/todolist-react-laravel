@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->boolean('status');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

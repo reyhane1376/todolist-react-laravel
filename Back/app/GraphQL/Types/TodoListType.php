@@ -9,7 +9,7 @@ use Rebing\GraphQL\Support\Type as GraphQLType;
 class TodoListType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'TodoList',
+        'name'        => 'TodoList',
         'description' => 'A type'
     ];
 
