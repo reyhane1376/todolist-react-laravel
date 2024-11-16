@@ -25,7 +25,6 @@ services:
       - "8085:80"
     networks:
       - my_network
-
   laravel:
     build:
       context: ./Back
@@ -40,6 +39,8 @@ services:
       DB_PASSWORD: root
     ports:
       - "8000:8000"
+    volumes:
+      - ./Back:/var/www
     networks:
       - my_network
     depends_on:
