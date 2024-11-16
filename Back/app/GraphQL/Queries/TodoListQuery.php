@@ -19,13 +19,16 @@ class TodoListQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(Type::string());
+        return Type::listOf(GraphQL::type('TodoList'));
     }
 
     public function args(): array
     {
         return [
-
+            'user_id' => [
+                'type' => Type::int(),
+                'description' => 'The ID of the user',
+            ],
         ];
     }
 
@@ -36,8 +39,8 @@ class TodoListQuery extends Query
         $select = $fields->getSelect();
         $with = $fields->getRelations();
 
-        return [
-            'The todoList works',
-        ];
+        return \App\Models\TodoList::where('user_id', $args['user_id'])
+        ->select($select)
+        ->get();
     }
 }
