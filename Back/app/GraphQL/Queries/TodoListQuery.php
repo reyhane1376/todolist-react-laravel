@@ -9,6 +9,8 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+use App\Models\Todolist;
 
 class TodoListQuery extends Query
 {
@@ -39,8 +41,7 @@ class TodoListQuery extends Query
         $select = $fields->getSelect();
         $with = $fields->getRelations();
 
-        return \App\Models\TodoList::where('user_id', $args['user_id'])
-        ->select($select)
+        return TodoList::select($select)
         ->get();
     }
 }
