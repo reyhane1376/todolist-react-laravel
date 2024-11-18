@@ -19,7 +19,6 @@ class TodolistFactory extends Factory
         return [
             'title'  => $this->faker->sentence,
             'status' => $this->faker->boolean,
-            'user_id'=> 1
         ];
     }
 }

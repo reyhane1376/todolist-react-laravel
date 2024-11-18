@@ -11,7 +11,6 @@ class Todolist extends Model
 
     protected $fillable = [
         'title',
-        'status',
-        'user_id'
+        'status'
     ];
 }
