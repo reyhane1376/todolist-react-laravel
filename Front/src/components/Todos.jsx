@@ -39,6 +39,15 @@ export default function Todos() {
         }
     `;
 
+    const UPDATE_TODO_TITLE_MUTATION = `
+        mutation UpdateTodoTitle($id: Int!, $title: String!) {
+            updateTodoTitle(id: $id, title: $title) {
+                id
+                title
+            }
+        }
+    `;
+
 
     const fetchTodos = async () => {
         setLoading(true);
@@ -82,7 +91,7 @@ export default function Todos() {
     const toggleTodoStatusHandler = async (todo) => {
         try {
             const updatedTodo = await fetchGraphQL(TOGGLE_TODO_STATUS_MUTATION, {
-                id: todo.id, // Ensure this is an integer
+                id: todo.id,
                 status: !todo.status,
             });
     
@@ -100,14 +109,26 @@ export default function Todos() {
     };
     
 
-    const editTodoTitleHandler = (todo, newTitleValue) => {
-        setTodos(
-            todos.map((todoItem) =>
-                todo.id === todoItem.id
-                    ? { ...todoItem, title: newTitleValue }
-                    : todoItem
-            )
-        );
+    const editTodoTitleHandler = async (todo, newTitleValue) => {
+        try {
+            const updatedTodo = await fetchGraphQL(UPDATE_TODO_TITLE_MUTATION, {
+                id: todo.id,
+                title: newTitleValue,
+            });
+    
+            setTodos(
+                todos.map((todoItem) =>
+                    todo.id === todoItem.id
+                        ? { ...todoItem, title: updatedTodo.updateTodoTitle.title }
+                        : todoItem
+                )
+            );
+        } catch (error) {
+            console.error('Failed to toggle status:', error);
+            alert('Failed to update the status. Please try again.');
+        }
+
+
     };
 
     if (loading) return <p>Loading...</p>;
