@@ -48,6 +48,15 @@ export default function Todos() {
         }
     `;
 
+    const DELETE_TODO_MUTATION = `
+        mutation DeleteTodo($id: Int!) {
+            deleteTodo(id: $id) {
+                id
+                title
+            }
+        }
+    `;
+
 
     const fetchTodos = async () => {
         setLoading(true);
@@ -84,8 +93,21 @@ export default function Todos() {
         }
     };
 
-    const deleteTodoHandler = (todo) => {
-        setTodos(todos.filter((todoItem) => todo.id !== todoItem.id));
+    const deleteTodoHandler = async (todo) => {
+        try {
+            const response = await fetchGraphQL(DELETE_TODO_MUTATION, {
+                id: todo.id,
+            });
+    
+            if (response.deleteTodo) {
+                setTodos(todos.filter((todoItem) => todo.id !== todoItem.id));
+            } else {
+                alert('Failed to delete the todo item. Please try again.');
+            }
+        } catch (error) {
+            console.error('Failed to delete todo:', error);
+            alert('Failed to delete the todo item. Please try again.');
+        }
     };
 
     const toggleTodoStatusHandler = async (todo) => {

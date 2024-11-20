@@ -78,9 +78,10 @@ return [
                 'todolists' => App\GraphQL\Queries\TodoListQuery::class,
             ],
             'mutation' => [
-                'createTodo' => App\GraphQL\Mutations\CreateTodoMutation::class,
+                'createTodo'       => App\GraphQL\Mutations\CreateTodoMutation::class,
                 'updateTodoStatus' => App\GraphQL\Mutations\UpdateTodoStatusMutation::class,
-                'updateTodoTitle' => App\GraphQL\Mutations\UpdateTodoTitleMutation::class,
+                'updateTodoTitle'  => App\GraphQL\Mutations\UpdateTodoTitleMutation::class,
+                'deleteTodo'       => App\GraphQL\Mutations\DeleteTodoMutation::class,
             ],
             // The types only available in this schema
             'types' => [
