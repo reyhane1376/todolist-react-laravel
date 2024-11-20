@@ -39,9 +39,9 @@ This project is a **To-Do List application** built to demonstrate the integratio
 ```
 3. Access the application:
 
-  Frontend: http://localhost:3000
-  Backend: http://localhost:8000
-  GraphQL Playground: http://localhost:8000/api/graphql
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
+- GraphQL Playground: http://localhost:8000/api/graphql
 
 4. Apply migrations:
 ```bash
