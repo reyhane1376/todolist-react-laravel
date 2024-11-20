@@ -55,6 +55,9 @@ services:
       - "5173:5173"
     networks:
       - my_network
+    volumes:
+      - ./Front:/app
+      - /app/node_modules
 
 networks:
   my_network:
