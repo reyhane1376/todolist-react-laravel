@@ -79,6 +79,7 @@ return [
             ],
             'mutation' => [
                 'createTodo' => App\GraphQL\Mutations\CreateTodoMutation::class,
+                'updateTodoStatus' => App\GraphQL\Mutations\UpdateTodoStatusMutation::class,
             ],
             // The types only available in this schema
             'types' => [

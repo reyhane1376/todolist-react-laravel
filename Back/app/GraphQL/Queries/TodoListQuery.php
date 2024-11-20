@@ -46,6 +46,6 @@ class TodoListQuery extends Query
         $query->where('status', $args['status']);
     }
 
-    return $query->get();
+    return $query->latest()->get();
     }
 }

@@ -30,6 +30,15 @@ export default function Todos() {
         }
     `;
 
+    const TOGGLE_TODO_STATUS_MUTATION = `
+        mutation ToggleTodoStatus($id: Int!, $status: Boolean!) {
+            updateTodoStatus(id: $id, status: $status) {
+                id
+                status
+            }
+        }
+    `;
+
 
     const fetchTodos = async () => {
         setLoading(true);
@@ -51,14 +60,14 @@ export default function Todos() {
     const onInputNewTodoChangeHandler = (event) => {
         setNewTodoTitle(event.target.value);
     };
-    
+
     const addNewTodoHandler = async (event) => {
         if (event.key === 'Enter' && newTodoTitle !== '') {
             try {
                 const data = await fetchGraphQL(CREATE_TODO_MUTATION, { title: newTodoTitle });
                 const newTodo = data.createTodo;
     
-                setTodos([...todos, newTodo]);
+                setTodos([newTodo, ...todos]);
                 setNewTodoTitle('');
             } catch (err) {
                 setError(err.message);
@@ -70,15 +79,26 @@ export default function Todos() {
         setTodos(todos.filter((todoItem) => todo.id !== todoItem.id));
     };
 
-    const toggleTodoStatusHandler = (todo) => {
-        setTodos(
-            todos.map((todoItem) =>
-                todo.id === todoItem.id
-                    ? { ...todoItem, status: !todoItem.status }
-                    : todoItem
-            )
-        );
+    const toggleTodoStatusHandler = async (todo) => {
+        try {
+            const updatedTodo = await fetchGraphQL(TOGGLE_TODO_STATUS_MUTATION, {
+                id: todo.id, // Ensure this is an integer
+                status: !todo.status,
+            });
+    
+            setTodos(
+                todos.map((todoItem) =>
+                    todo.id === todoItem.id
+                        ? { ...todoItem, status: updatedTodo.updateTodoStatus.status }
+                        : todoItem
+                )
+            );
+        } catch (error) {
+            console.error('Failed to toggle status:', error);
+            alert('Failed to update the status. Please try again.');
+        }
     };
+    
 
     const editTodoTitleHandler = (todo, newTitleValue) => {
         setTodos(
