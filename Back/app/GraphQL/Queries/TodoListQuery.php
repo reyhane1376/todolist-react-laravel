@@ -27,21 +27,25 @@ class TodoListQuery extends Query
     public function args(): array
     {
         return [
-            'user_id' => [
-                'type' => Type::int(),
-                'description' => 'The ID of the user',
+            'status' => [
+                'type' => Type::boolean(),
+                'description' => 'Filter by task status (true for completed, false for pending)',
             ],
         ];
     }
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        /** @var SelectFields $fields */
-        $fields = $getSelectFields();
-        $select = $fields->getSelect();
-        $with = $fields->getRelations();
+    $fields = $getSelectFields();
+    $select = $fields->getSelect();
+    $with = $fields->getRelations();
 
-        return TodoList::select($select)
-        ->get();
+    $query = TodoList::select($select)->with($with);
+
+    if (isset($args['status'])) {
+        $query->where('status', $args['status']);
+    }
+
+    return $query->get();
     }
 }
