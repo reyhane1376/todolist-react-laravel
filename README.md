@@ -29,62 +29,67 @@ This project is a **To-Do List application** built to demonstrate the integratio
 ### Setup Steps
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/todolist.git
-   cd todolist
-``
- 2. Start the services:
+```bash
+   git clone https://github.com/reyhane1376/todolist-react-laravel.git
+   cd todolist-react-laravel
+```
+2. Start the services:
  ```bash
-docker-compose up --build
+  docker-compose up --build
 ```
 3. Access the application:
 
   Frontend: http://localhost:3000
   Backend: http://localhost:8000
-  GraphQL Playground: http://localhost:8000/graphql-playground
+  GraphQL Playground: http://localhost:8000/api/graphql
 
 4. Apply migrations:
-   ```bash
-     docker exec -it backend-container-name php artisan migrate
-``
+```bash
+     docker exec -it react-laravel-back php artisan migrate
+```
 ## Usage
 GraphQL Queries and Mutations
 Get All Todos:
 ```bash
   query {
-  todos {
-    id
-    title
-    status
-    created_at
-    updated_at
+      todolists {
+          id
+          title
+          status
+          created_at
+      }
   }
-}
 
 ```
 Add a Todo:
 ```bash
-mutation {
-  createTodo(title: "Sample Todo", status: false) {
-    id
-    title
-    status
+  mutation {
+    createTodo(title: "Sample Todo") {
+      id
+      title
+    }
   }
-}
 
 ```
 Update a Todo:
 ```bash
-mutation {
-  updateTodoStatus(id: 1, status: true) {
-    id
-    status
+  mutation {
+    updateTodoStatus(id: 1, status: true) {
+      id
+      status
+    }
   }
-}
+```
+Change Status Todo:
+```bash
+  mutation {
+    updateTodoStatus(id: 1, status: true) {
+      id
+      status
+    }
+  }
 ```
 Delete a Todo:
-
-graphql
 ```bash
 mutation {
   deleteTodo(id: 1) {
@@ -102,9 +107,9 @@ View, add, edit, delete, and toggle the status of to-do items.
 
 ## Project Structure
 ```bash
-todolist/
-├── backend/   # Laravel backend
-├── frontend/  # React frontend
+react-laravel-back/
+├── Back/   # Laravel backend
+├── Front/  # React frontend
 ├── docker-compose.yml
 └── README.md
 ```
