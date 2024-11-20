@@ -1,19 +1,15 @@
-# Use the Node.js image as the base image
-FROM docker.arvancloud.ir/node:16
+FROM docker.arvancloud.ir/node:18
 
-# Set the working directory and ensure it is writable by the user
+# Set the working directory
 WORKDIR /app
 
-# Use an existing non-root user (node is built-in with the Node image)
-USER node
-
 # Copy application files
-COPY --chown=node:node . .
+COPY . .
 
 # Install dependencies
 RUN npm install
 
-# Expose the application port
+# Expose port 3000
 EXPOSE 5173
 
 # Start the React development server
