@@ -33,11 +33,14 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY --from=docker.arvancloud.ir/composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy the existing application directory contents to the working directory
-COPY --chown=www-data:www-data . /var/www
+COPY --chown=www-data:www-data composer.json composer.lock /var/www/
 
-# Change current user to www
+# Install PHP dependencies
+RUN composer install --no-scripts --no-autoloader --no-cache
+
+# Change current user to www-data
 # USER www-data
 
-# Expose port 9000 and start php-fpm server
+# Expose port 8000 and start php-fpm server
 EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

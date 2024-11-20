@@ -1,0 +1,9 @@
+node_modules
+vendor
+.git
+storage/*.log
+storage/framework/*
+storage/debugbar/*
+.env
+docker-compose.yml
+.dockerignore
